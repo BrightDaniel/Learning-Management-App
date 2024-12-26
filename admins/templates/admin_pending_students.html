@@ -1,0 +1,90 @@
+{% extends 'admin_base.html' %}
+
+
+{% block content %}
+
+{% load static  %}
+
+
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Pending Students</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+       
+    </div>
+   
+
+    <div class="card overflow-hidden">
+        <div class="card-body p-0 overflow-x-auto">
+            <table id="studentTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        
+                        <th class="h6 text-gray-300">#</th>
+                        <th class="h6 text-gray-300">Name</th>
+                        <th class="h6 text-gray-300">Email</th>
+                        <th class="h6 text-gray-300">Class</th>
+                        <th class="h6 text-gray-300">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in pending_students %}
+                    <tr>
+                      
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300">{{ forloop.counter }}</span>
+                        </td>
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300">{{ student.full_name }}</span>
+                        </td>
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300">{{ student.email }}</span>
+                        </td>
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300">{{ student.student_class }}</span>
+                        </td>
+                        <td>
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ student.id }}">
+                                <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                            </form>
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ student.id }}">
+                                <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <span class="h6 text-gray-300">No pending students found.</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+
+
+{% endblock %}

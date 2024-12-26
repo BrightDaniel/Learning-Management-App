@@ -1,0 +1,92 @@
+{% extends 'admin_base.html' %}
+
+
+{% block content %}
+
+{% load static  %}
+
+
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Pending Teachers</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+       
+    </div>
+   
+
+    <div class="card overflow-hidden">
+        <div class="card-body p-0 overflow-x-auto">
+            <table id="studentTable" class="table table-striped">
+                <thead>
+                    <tr>
+                      
+                        <th class="h6 text-gray-300">#</th>
+                        <th class="h6 text-gray-300">Name</th>
+                        <th class="h6 text-gray-300">Email</th>
+                        <th class="h6 text-gray-300">Phone </th>
+                        <th class="h6 text-gray-300">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for teacher in pending_teachers %}
+
+                    <tr>
+                        
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300"> {{ forloop.counter }} </span>
+                        </td>
+
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300"> {{ teacher.full_name }} </span>
+                        </td>
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300"> {{ teacher.email }} </span>
+                        </td>
+                        <td>
+                            <span class="h6 mb-0 fw-medium text-gray-300"> {{ teacher.phone_number }} </span>
+                        </td>
+                   
+                        <td>
+                            
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="teacher_id" value="{{ teacher.id }}">
+                                <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                            </form>
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="teacher_id" value="{{ teacher.id }}">
+                                <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+                            </form>
+
+
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+
+
+{% endblock %}

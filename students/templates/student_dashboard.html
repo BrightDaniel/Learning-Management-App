@@ -1,0 +1,148 @@
+{% extends 'student_base.html' %}
+
+
+{% block title %}
+
+    Student Dashboard | 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+
+<div class="dashboard-body">
+    <div class="row gy-4">
+        <div class="col-lg-9">
+            <!-- Grettings Box Start -->
+            <div class="grettings-box position-relative rounded-16 bg-main-600 overflow-hidden gap-16 flex-wrap z-1">
+                <img src="{% static 'auth/assets/images/bg/grettings-pattern.png' %}" alt="" class="position-absolute inset-block-start-0 inset-inline-start-0 z-n1 w-100 h-100 opacity-6">
+                <div class="row gy-4">
+                    <div class="col-sm-7">
+                        <div class="grettings-box__content py-xl-4">
+                            <h2 class="text-white mb-0">Hello, {{ student_name }}! </h2>
+                            <p class="text-15 fw-light mt-4 text-white">Let’s learning something today</p>
+                            <p class="text-lg fw-light mt-24 text-white">Set your study plan and growth with community</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 d-sm-block d-none">
+                        <div class="text-center h-100 d-flex justify-content-center align-items-end ">
+                            <img src="{% static 'auth/assets/images/thumbs/gretting-img.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Grettings Box End -->
+
+
+
+             <!-- Top Course Start -->
+             <div class="card mt-24">
+                <div class="card-body">
+                    <div class="mb-20 flex-between flex-wrap gap-8">
+                        <h4 class="mb-0">Your Courses</h4>
+                        <span  class="text-13 fw-medium text-main-600">Class Name</span>
+                    </div>
+                    
+                    <div class="row g-20">
+                        {% if course_data %}
+                            {% for course in course_data %}
+                            <div class="col-lg-4 col-sm-6">
+                                <div class="card border border-gray-100">
+                                    <div class="card-body p-8">
+                                        <div class="p-8">
+                                            <span class="text-13 py-2 px-10 rounded-pill bg-success-50 text-success-600 mb-16">
+                                                {{ student_class.name }}
+                                            </span>
+                                            <h5 class="mb-0">
+                                                <a href="#" class="hover-text-main-600">{{ course.name }}</a>
+                                            </h5>
+                    
+                                            <div class="flex-align gap-8 flex-wrap mt-16">
+                                                <div>
+                                                    <span class="text-gray-600 text-13">Created by: {{ course.teacher }}</span>
+                                                </div>
+                                            </div>
+                    
+                                            <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
+                                                <div class="flex-align gap-4">
+                                                    <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
+                                                    <span class="text-13 text-gray-600">{{ course.weekly_lesson_count }} Weekly Lessons</span>
+                                                </div>
+                                                <div class="flex-align gap-4">
+                                                    <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
+                                                    <span class="text-13 text-gray-600">{{ course.quiz_count }} Quizzes</span>
+                                                </div>
+                                            </div>
+                    
+                                            <div class="flex-between gap-4 flex-wrap mt-24">
+                                                <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">Start Course</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-gray-600 text-center">No courses available for your class yet.</p>
+                        {% endif %}
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <!-- Top Course End -->
+
+            
+            <!-- Table Start -->
+            <div class="card mt-24 overflow-hidden">
+                <div class="card-header">
+                    <div class="mb-0 flex-between flex-wrap gap-8">
+                        <h4 class="mb-0">Your Grades</h4>
+                        <a href="student-courses.html" class="text-13 fw-medium text-main-600 hover-text-decoration-underline">See All</a>
+                    </div>
+                </div>
+               
+             </div>
+            <!-- Table End -->
+
+        </div>
+        <div class="col-lg-3">
+            
+            <!-- Calendar Start -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="calendar">
+                        <div class="calendar__header">
+                            <button type="button" class="calendar__arrow left"><i class="ph ph-caret-left"></i></button>
+                            <p class="display h6 mb-0">""</p>
+                            <button type="button" class="calendar__arrow right"><i class="ph ph-caret-right"></i></button>
+                        </div>
+                    
+                        <div class="calendar__week week">
+                            <div class="calendar__week-text">Su</div>
+                            <div class="calendar__week-text">Mo</div>
+                            <div class="calendar__week-text">Tu</div>
+                            <div class="calendar__week-text">We</div>
+                            <div class="calendar__week-text">Th</div>
+                            <div class="calendar__week-text">Fr</div>
+                            <div class="calendar__week-text">Sa</div>
+                        </div>
+                        <div class="days"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Calendar End -->
+
+        
+
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

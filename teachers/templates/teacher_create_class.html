@@ -1,0 +1,81 @@
+
+{% extends 'teacher_base.html' %}
+
+
+{% block title %}
+
+    Create A new Class 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Create Class</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+
+  
+    </div>
+
+
+    <!-- Course Tab Start -->
+    <div class="card">
+        <div class="card-header border-bottom border-gray-100 flex-align gap-8">
+            <h5 class="mb-0">Class Details</h5>        
+            <button type="button" class="text-main-600 text-md d-flex" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Course Details">
+                <i class="ph-fill ph-question"></i>
+            </button>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row gy-20">
+                    <div class="col-sm-12">
+                        <label for="className" class="h5 mb-8 fw-semibold font-heading">Class Name <span class="text-13 text-gray-400 fw-medium">(Required)</span></label>
+                        <input type="text" name="class_name" class="form-control py-11 pe-76" id="className" placeholder="Enter Class Name" required>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="startDate" class="h5 mb-8 fw-semibold font-heading">Start Date</label>
+                        <input type="date" name="start_date" class="form-control py-11 pe-76" id="startDate">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="endDate" class="h5 mb-8 fw-semibold font-heading">End Date</label>
+                        <input type="date" name="end_date" class="form-control py-11 pe-76" id="endDate">
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="description" class="h5 mb-8 fw-semibold font-heading">Description</label>
+                        <textarea name="description" class="form-control py-11 pe-76" id="description" placeholder="Describe the class"></textarea>
+                    </div>
+                    
+                    <div class="col-sm-12 text-end">
+                        <button type="submit" class="btn btn-main rounded-pill py-9">Create Class</button>
+                    </div>
+
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    <!-- Course Tab End -->
+</div>
+
+
+
+{% endblock %}

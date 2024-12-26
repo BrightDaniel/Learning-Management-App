@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+// Function to check right-angled triangle
+void checkRightAngledTriangle() {
+    int angle1, angle2, angle3;
+    
+    printf("Right-Angled Triangle Checker\n");
+    
+    // Input two angles
+    printf("Enter first angle: ");
+    scanf("%d", &angle1);
+    printf("Enter second angle: ");
+    scanf("%d", &angle2);
+    
+    // Calculate third angle
+    angle3 = 180 - (angle1 + angle2);
+    
+    // Check if right-angled triangle
+    if (angle1 == 90 || angle2 == 90 || angle3 == 90) {
+        printf("It's a right-angled triangle! 📐\n");
+    } else {
+        printf("Not a right-angled triangle. ▲\n");
+    }
+}
+
+// Function to check palindrome number
+void checkPalindromeNumber() {
+    int number, originalNumber, reversedNumber = 0, remainder;
+    
+    printf("\nPalindrome Number Checker\n");
+    
+    // Input number
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    // Store original number
+    originalNumber = number;
+    
+    // Reverse the number
+    while (number != 0) {
+        remainder = number % 10;
+        reversedNumber = reversedNumber * 10 + remainder;
+        number = number / 10;
+    }
+    
+    // Check palindrome
+    if (originalNumber == reversedNumber) {
+        printf("%d is a palindrome! 🎉\n", originalNumber);
+    } else {
+        printf("%d is not a palindrome. 😊\n", originalNumber);
+    }
+}
+
+int main() {
+    checkRightAngledTriangle();
+    checkPalindromeNumber();
+    
+    return 0;
+}

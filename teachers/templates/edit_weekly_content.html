@@ -1,0 +1,246 @@
+
+{% extends 'teacher_base.html' %}
+
+
+{% block title %}
+
+    Create A new Course 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+        <div class="breadcrumb mb-24">
+            <ul class="flex-align gap-4">
+                <li><a href="{% url 'teacher_dashboard' %}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+                <li><span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span></li>
+                <li><span class="text-main-600 fw-normal text-15">Edit Weekly Content for {{ lesson.week_name }}</span></li>
+            </ul>
+        </div>
+        <!-- Breadcrumb End -->
+    </div>
+    
+    <!-- Course Tab Start -->
+    <div class="card">
+        <div class="card-header border-bottom border-gray-100 flex-align gap-8">
+            <h5 class="mb-0">{{ lesson.week_name }} Details</h5>
+            <button type="button" class="text-main-600 text-md d-flex" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Course Details">
+                <i class="ph-fill ph-question"></i>
+            </button>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" class="mb-5">
+                {% csrf_token %}
+                <div class="row gy-20">
+                    <!-- Week Name -->
+                    <div class="col-sm-12">
+                        <label for="weekName" class="h5 mb-8 fw-semibold font-heading">Week Name</label>
+                        <input type="text" name="week_name" id="weekName" value="{{ lesson.week_name }}" class="form-control py-11" placeholder="Name of the Week" required>
+                    </div>
+        
+                    <!-- File Upload -->
+                    <div class="col-12">
+                        <div class="flex-align gap-22">
+                            <div class="avatar-upload flex-shrink-0">
+                                <input type="file" name="content_file" id="contentFile" accept=".pdf,.doc,.docx,.txt">
+                            </div>
+                            <div class="avatar-upload-box text-center position-relative flex-grow-1 py-24 px-4 rounded-16 border border-main-300 border-dashed bg-main-50 hover-bg-main-100 hover-border-main-400 transition-2 cursor-pointer">
+                                <label for="contentFile" class="position-absolute inset-block-start-0 inset-inline-start-0 w-100 h-100 rounded-16 cursor-pointer z-1"></label>
+                                <span class="text-32 icon text-main-600 d-inline-flex"><i class="ph ph-upload"></i></span>
+                                <span class="text-13 d-block text-gray-400 my-8">Click to upload or drag and drop</span>
+                                <span class="text-13 d-block text-main-600">TXT, DOC, PDF</span>
+                                {% if lesson.content_file %}
+                                <p class="mt-2">Current File: <a href="{{ lesson.content_file.url }}" target="_blank" class="text-main-600">{{ lesson.content_file.name }}</a></p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- Submit Button -->
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-main rounded-pill py-9">Upload Changes</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    
+    <div class="dashboard-body">
+        <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+            <div class="breadcrumb mb-24">
+                <ul class="flex-align gap-4">
+                    <h1 class="modal-title fs-5" id="exampleModalLabelOne">Create Weekly Quiz For {{ lesson.week_name }}</h1>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header border-bottom border-gray-100 flex-between flex-wrap gap-8">
+                <div class="flex-align gap-8 flex-wrap">
+                    <h5 class="mb-0">Quiz Questions</h5>
+                    <button type="button" class="text-main-600 text-md d-flex" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Quiz Questions">
+                        <i class="ph-fill ph-question"></i>
+                    </button>
+                </div>
+
+            </div>
+        
+            <!-- Quiz Form -->
+            <div class="card-body">
+                <form id="quizForm" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-20">
+                        <label for="question_text" class="h6 mb-8 fw-semibold">Question</label>
+                        <textarea class="form-control fw-medium text-15" id="question_text" placeholder="Add question" name="question_text" required></textarea>
+                    </div>
+                    <div class="mb-20">
+                        <label class="h6 mb-8 fw-semibold">Multiple Choices</label>
+                        <div class="choices-container">
+                            <div class="mb-3">
+                                <label>Option A</label>
+                                <input type="text" name="option_a" class="form-control" placeholder="Enter option A" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Option B</label>
+                                <input type="text" name="option_b" class="form-control" placeholder="Enter option B" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Option C</label>
+                                <input type="text" name="option_c" class="form-control" placeholder="Enter option C" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Option D</label>
+                                <input type="text" name="option_d" class="form-control" placeholder="Enter option D" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-20">
+                        <label for="correct_answer" class="h6 mb-8 fw-semibold">Correct Answer</label>
+                        <select class="form-control form-select rounded-8 bg-gray-50 border border-main-200 py-19" id="correct_answer" name="correct_answer" required>
+                            <option value="" disabled selected>Select correct answer</option>
+                            <option value="A">Option A</option>
+                            <option value="B">Option B</option>
+                            <option value="C">Option C</option>
+                            <option value="D">Option D</option>
+                        </select>
+                    </div>
+                    <div class="mb-20">
+                        <label for="score" class="h6 mb-8 fw-semibold">Score</label>
+                        <input type="number" name="score" id="score" class="form-control" placeholder="Enter score" required>
+                    </div>
+
+                    <button type="submit" name="save_question" class="btn btn-secondary rounded-pill py-9">Save Question</button>
+
+                    <div class="flex-align justify-content-end gap-8">
+                        <button type="submit" name="publish_quiz" class="btn btn-primary rounded-pill py-9">Publish Quiz</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="card-body p-0 overflow-x-auto">
+                <h3>Saved Questions</h3>
+                <table id="CurrentQuizQuestion" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="h6 text-gray-300">#</th>
+                            <th class="h6 text-gray-300">Question</th>
+                            <th class="h6 text-gray-300">Score</th>
+                            <th class="h6 text-gray-300">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for question in questions %}
+                        <tr>
+                            <td>
+                                <span class="h6 mb-0 fw-medium text-gray-300">{{ forloop.counter }}</span>
+                            </td>
+                            <td>
+                                <span class="h6 mb-0 fw-medium text-gray-300">{{ question.question_text }}</span>
+                            </td>
+                            <td>
+                                <span class="h6 mb-0 fw-medium text-gray-300">{{ question.score }}</span>
+                            </td>
+                            <td>
+                                <a href="{% url 'delete_question' question.id %}" class="bg-main-50 text-main-600 py-2 px-14 rounded-pill hover-bg-main-600 hover-text-white" onclick="return confirm('Are you sure you want to delete this question?')">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+               
+            </div>
+
+         
+          
+        </div>
+        
+        
+        <!-- <script>
+            // Add Choices Dynamically
+            document.addEventListener("DOMContentLoaded", () => {
+                const addChoiceButton = document.querySelector("#addChoiceButton");
+                const choicesContainer = document.querySelector(".choices-container");
+        
+                let choiceCount = 4; // Start with 4 choices (A, B, C, D)
+        
+                addChoiceButton.addEventListener("click", (e) => {
+                    e.preventDefault();
+        
+                    // Add a new choice field
+                    const newChoice = document.createElement("div");
+                    newChoice.className = "mb-3";
+                    newChoice.innerHTML = `
+                        <label>Option ${String.fromCharCode(65 + choiceCount)}</label>
+                        <input type="text" name="option_${String.fromCharCode(97 + choiceCount)}" class="form-control" placeholder="Enter option ${String.fromCharCode(65 + choiceCount)}">
+                    `;
+                    choicesContainer.appendChild(newChoice);
+                    choiceCount++;
+                });
+            });
+        
+            // Handle Modal Form Submission via AJAX
+            document.addEventListener("DOMContentLoaded", () => {
+                const addQuestionForm = document.querySelector("#addQuestionForm");
+        
+                addQuestionForm.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+        
+                    const formData = new FormData(addQuestionForm);
+        
+                    const response = await fetch(addQuestionForm.action, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+                        },
+                        body: formData,
+                    });
+        
+                    if (response.ok) {
+                        const data = await response.json();
+                        alert("Question added successfully!");
+                        location.reload(); // Reload page to see the new question
+                    } else {
+                        alert("An error occurred. Please try again.");
+                    }
+                });
+            });
+        </script> -->
+        
+    </div>
+    
+    
+
+{% endblock %}
+
+

@@ -1,0 +1,108 @@
+{% extends 'admin_base.html' %}
+
+
+{% block title %}
+
+     All Users 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="{% url 'admin_dashboard' %}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">All users</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+      
+    </div>
+   
+
+    <div class="card overflow-hidden">
+        <div class="card-body p-0 overflow-x-auto">
+            <table id="userTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="h6 text-gray-300">Full Name</th>
+                        <th class="h6 text-gray-300">Email</th>
+                        <th class="h6 text-gray-300">Role</th>
+                        <th class="h6 text-gray-300">Last Login</th>
+                        <th class="h6 text-gray-300">Date Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in page_obj.object_list %}
+                    <tr>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300"> {% if user.is_superuser %}
+                            <span class="h6 mb-0 fw-medium text-gray-300">
+                                {{ user.get_full_name|default:user.username }}
+                            </span>
+                        {% else %}
+                            <span class="h6 mb-0 fw-medium text-gray-300">
+                                {{ user.get_full_name|default:user.username }}
+                            </span>
+                        {% endif %}</span></td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ user.email }}</span></td>
+                        <td>
+                            <span class="text-13 py-2 px-8 bg-success-50 text-success-600 d-inline-flex align-items-center gap-8 rounded-pill">
+                                <span class="w-6 h-6 bg-success-600 rounded-circle flex-shrink-0"></span>
+                                {% if user.groups.exists %}
+                                {{ user.groups.first.name }}
+                            {% else %}
+                                Admin
+                            {% endif %}
+                            </span>
+                           
+                       </td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ user.last_login }}</span></td>
+                        <td><span class="h6 mb-0 fw-medium text-gray-300">{{ user.date_joined }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+       
+        <div class="card-footer flex-between flex-wrap">
+            <span class="text-gray-900">
+                Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries
+            </span>
+            <ul class="pagination flex-align flex-wrap">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                </li>
+                {% endif %}
+                {% for page_num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_num == page_obj.number %}active{% endif %}">
+                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    
+</div>
+
+
+
+{% endblock %}
+
+
+

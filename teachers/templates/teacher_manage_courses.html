@@ -1,0 +1,67 @@
+{% extends 'teacher_base.html' %}
+
+
+{% load static %}
+
+{% block title %}
+
+Manage Classes | Macdonald Trevan International schools
+
+{% endblock %}
+
+
+{% block content%}
+
+
+
+
+<div class="dashboard-body">
+    <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Manage Classes</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+
+
+    <!-- Recommended Course Start -->
+    <div class="card mt-24">
+        <div class="card-body">
+            <div class="mb-20 flex-between flex-wrap gap-8">
+                <h4 class="mb-0">Manage Courses</h4>
+               
+            </div>
+            
+            <div class="row g-20">
+                {% for course in courses %}
+                <div class="col-xxl-3 col-lg-4 col-sm-6">
+                    <div class="card border border-gray-100">
+                        <div class="card-body p-8">
+                            <h5 class="mb-0">
+                                <a href="{% url 'edit_course_details' course.id %}" class="hover-text-main-600">{{ course.name }}</a>
+                            </h5>
+                            <span class="text-gray-600 text-13">Class: {{ course.associated_class.name }}</span>
+                            <div class="mt-12">
+                                <a href="{% url 'edit_course_details' course.id %}" class="btn btn-outline-main rounded-pill py-9">Edit Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+     
+            
+        </div>
+    </div>
+    <!-- Recommended Course End -->
+</div>
+
+
+
+
+{% endblock %}

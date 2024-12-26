@@ -1,0 +1,78 @@
+{% extends 'admin_base.html' %}
+
+
+{% block content %}
+
+{% load static  %}
+
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Approved Teachers</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+    </div>
+    <div class="card overflow-hidden">
+        <div class="card-body p-0 overflow-x-auto">
+            <table id="teacherTable" class="table table-dark " >
+                <thead>
+                    <tr>
+                        <th class="h6 text-gray-300">#</th>
+                        <th class="h6 text-gray-300">Name</th>
+                        <th class="h6 text-gray-300">Email</th>
+                        <th class="h6 text-gray-300">Classes Assigned</th>
+                        <th class="h6 text-gray-300">Last Login</th>
+                        <th class="h6 text-gray-300">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for teacher in approved_teachers %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ teacher.get_full_name|default:teacher.username }}</td>
+                        <td>{{ teacher.email }}</td>
+                        <td>
+                            {% for class in teacher.created_classes.all %}
+                                {{ class.name }}{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                None
+                            {% endfor %}
+                        </td>
+                        <td>{{ teacher.last_login|date:"Y-m-d H:i"|default:"Never Logged In" }}</td>
+                        <td>
+                            <form method="POST" style="display: inline;" id="resetForm-{{ teacher.id }}" onsubmit="return confirmReset();">
+                                {% csrf_token %}
+                                <input type="hidden" name="teacher_id" value="{{ teacher.id }}">
+                                <button type="submit" name="action" value="reset" class="btn btn-danger">Reset Login Details</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+            <script>
+                function confirmReset() {
+                    return confirm("Are you sure you want to reset the login details for this teacher?");
+                }
+            </script>
+        </div>
+        
+        
+    </div>
+    
+</div>
+
+
+
+
+
+{% endblock %}

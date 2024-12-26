@@ -70,6 +70,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'LMSProject.wsgi.application'
 
 
+LOGIN_URL = '/admin_login/'  # Redirect to your custom admin login page
+LOGIN_REDIRECT_URL = '/admin-dashboard/'  # Redirect after successful login
+LOGOUT_REDIRECT_URL = '/admin_login/'  # Redirect after logout
+
+
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -121,3 +127,13 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# Email Configuration
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')

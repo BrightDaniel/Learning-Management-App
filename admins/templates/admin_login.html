@@ -1,86 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-
-{% load static %}
-
 <head>
-    <title>Education Master Template</title>
-    <!-- META TAGS -->
-    <meta charset="utf-8">
+    {% load static %}
+
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Education master is one of the best educational html template, it's suitable for all education websites like university,college,school,online education,tution center,distance education,computer education">
-    <meta name="keyword" content="education html template, university template, college template, school template, online education template, tution center template">
-    <!-- FAV ICON(BROWSER TAB ICON) -->
-    <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
-    <!-- GOOGLE FONT -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
-    <!-- FONTAWESOME ICONS -->
-    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-    <!-- ALL CSS FILES -->
-    <link href="{% static 'css/materialize.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
-    <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
-    <link href="{% static 'css/style-mob.css' %}" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-</head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title -->
+    <title> Admin Login </title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href=" {% static 'auth/assets/images/logo/favicon.png' %}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/bootstrap.min.css' %}">
+    <!-- file upload -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/file-upload.css' %}">
+    <!-- file upload -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/plyr.css' %}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+    <!-- full calendar -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/full-calendar.css' %}">
+    <!-- jquery Ui -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/jquery-ui.css' %}">
+    <!-- editor quill Ui -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/editor-quill.css' %}">
+    <!-- apex charts Css -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/apexcharts.css' %}">
+    <!-- calendar Css -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/calendar.css' %}">
+    <!-- jvector map Css -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/jquery-jvectormap-2.0.5.css' %}">
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'auth/assets/css/main.css' %}">
+</head> 
 <body>
+    
+<!--==================== Preloader Start ====================-->
+  <div class="preloader">
+    <div class="loader"></div>
+  </div>
+<!--==================== Preloader End ====================-->
 
-   <section>
-		<div class="ad-log-main">
-			<div class="ad-log-in">
-				<div class="ad-log-in-logo">
-					<a href="index-2.html"><img src="{% static 'images/logo.png' %}" alt=""></a>
-				</div>
-				<div class="ad-log-in-con">
-			<div class="log-in-pop-right">
-                    <h4>Login</h4>
-                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
-                    <form class="s12">
-                        <div>
-                            <div class="input-field s12">
-                                <input type="text" data-ng-model="name" class="validate">
-                                <label class="">User name</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="input-field s12">
-                                <input type="password" class="validate">
-                                <label>Password</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="s12 log-ch-bx">
-                                <p>
-                                    <input type="checkbox" id="test5">
-                                    <label for="test5">Remember me</label>
-                                </p>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="input-field s4">
-                                <i class="waves-effect waves-light log-in-btn waves-input-wrapper" style=""><input type="submit" value="Login" class="waves-button-input"></i> </div>
-                        </div>
-                        
-                    </form>
+<!--==================== Sidebar Overlay End ====================-->
+<div class="side-overlay"></div>
+<!--==================== Sidebar Overlay End ====================-->
+
+
+<section class="auth d-flex">
+    <div class="auth-left bg-main-50 flex-center p-24">
+        <img src="{% static 'auth/assets/images/thumbs/auth-img1.png' %}" alt="">
+    </div>
+    <div class="auth-right py-40 px-24 flex-center flex-column">
+        <div class="auth-right__inner mx-auto w-100">
+            <a href="index.html" class="auth-right__logo">
+                <img src="{% static 'auth/assets/images/logo/logo.png' %}" alt="">
+            </a>
+            <h2 class="mb-8">Esteemed Admin! &#128075;</h2>
+            <p class="text-gray-600 text-15 mb-32">Please sign in to your account and take control</p>
+
+
+
+
+
+
+
+
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-24">
+                    <label for="email_or_username" class="form-label mb-8 h6">Email</label>
+                    <div class="position-relative">
+                        <input type="text" class="form-control py-11 ps-40" id="email_or_username" name="username" placeholder="Type your Admin Username" required>
+                        <span class="position-absolute top-50 translate-middle-y ms-16 text-gray-600 d-flex"><i class="ph ph-user"></i></span>
+                    </div>
                 </div>
-				</div>
-			</div>
-		</div>
-   </section>
+                <div class="mb-24">
+                    <label for="password" class="form-label mb-8 h6">Password</label>
+                    <div class="position-relative">
+                        <input type="password" class="form-control py-11 ps-40" id="password" name="password" placeholder="Enter password" required>
+                        <span class="position-absolute top-50 translate-middle-y ms-16 text-gray-600 d-flex"><i class="ph ph-lock"></i></span>
+                    </div>
+                </div>
+              
+                <button type="submit" class="btn btn-main rounded-pill w-100">Sign In</button>
+                <p class="mt-32 text-gray-600 text-center">Not an admin? Go to the teachers page
+                    <a href="{% url 'teacher_login' %}" class="text-main-600 hover-text-decoration-underline"> Login as a Teacher </a>
+                </p>
+            </form>
+            
+        </div>
+    </div>
+</section>
 
-    <!--Import jQuery before materialize.js-->
-    <script src="{% static 'js/main.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/materialize.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-</body>
 
+        <!-- Jquery js -->
+    <script src="{% static 'auth/assets/js/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap Bundle Js -->
+    <script src="{% static 'auth/assets/js/boostrap.bundle.min.js' %}"></script>
+    <!-- Phosphor Js -->
+    <script src="{% static 'auth/assets/js/phosphor-icon.js' %}"></script>
+    <!-- file upload -->
+    <script src="{% static 'auth/assets/js/file-upload.js' %}"></script>
+    <!-- file upload -->
+    <script src="{% static 'auth/assets/js/plyr.js' %}"></script>
+    <!-- dataTables -->
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <!-- full calendar -->
+    <script src="{% static 'auth/assets/js/full-calendar.js' %}"></script>
+    <!-- jQuery UI -->
+    <script src="{% static 'auth/assets/js/jquery-ui.js' %}"></script>
+    <!-- jQuery UI -->
+    <script src="{% static 'auth/assets/js/editor-quill.js' %}"></script>
+    <!-- apex charts -->
+    <script src="{% static 'auth/assets/js/apexcharts.min.js' %}"></script>
+    <!-- jvectormap Js -->
+    <script src="{% static 'auth/assets/js/jquery-jvectormap-2.0.5.min.js' %}"></script>
+    <!-- jvectormap world Js -->
+    <script src="{% static 'auth/assets/js/jquery-jvectormap-world-mill-en.js' %}"></script>    
+    <!-- main js -->
+    <script src="{% static 'auth/assets/js/main.js' %}"></script>
+
+
+    <!-- Add SweetAlert CDN link in your base template -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://smtpjs/v3/smtp.js"></script>
+
+    <script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+
+
+
+
+      <!-- JavaScript for Flash Messages -->
+      <script>
+        {% if messages %}
+            {% for message in messages %}
+                let icon = 'info';  // Default icon
+
+                // Map message tags to SweetAlert icons
+                {% if 'success' in message.tags %}
+                    icon = 'success';
+                {% elif 'warning' in message.tags %}
+                    icon = 'warning';
+                {% elif 'error' in message.tags %}
+                    icon = 'error';
+                {% endif %}
+
+                // Show SweetAlert notification
+                Swal.fire({
+                    icon: icon,
+                    title: "{{ message.tags|title }}",
+                    text: "{{ message }}",
+                    timer: 10000,  // Duration (10 seconds)
+                    timerProgressBar: true,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        const timerProgressBar = Swal.getTimerProgressBar();
+                        if (timerProgressBar) {
+                            timerProgressBar.classList.add('swal-progress-bar');
+                        }
+                    }
+                });
+            {% endfor %}
+        {% endif %}
+    </script>
+
+
+
+    </body>
 </html>

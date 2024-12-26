@@ -1,0 +1,140 @@
+{% extends 'student_base.html' %}
+
+
+{% block title %}
+
+ Student Settings
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+
+<div class="dashboard-body">
+    <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Setting</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+     
+    <div class="card overflow-hidden">
+        <div class="card-body p-0">
+           
+
+            <div class="setting-profile px-24">
+                <div class="flex-between">
+                    <div class="d-flex align-items-end flex-wrap mb-32 gap-24">
+                        <img src="{% static 'auth/assets/images/thumbs/setting-profile-img.jpg' %}" alt="" class="w-120 h-120 rounded-circle border border-white">
+                        <div>
+                            <h4 class="mb-8">
+                                
+                                <h4 class="mb-0">{{ student_name }} </h4>
+                                <p class="fw-medium text-13 text-gray-200">{{ email }}</p>
+                            
+                        </h4>
+                         
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav common-tab style-two nav-pills mb-0" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="pills-details-tab" data-bs-toggle="pill" data-bs-target="#pills-details" type="button" role="tab" aria-controls="pills-details" aria-selected="true">My Details</button>
+                    </li>
+                   
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="pills-password-tab" data-bs-toggle="pill" data-bs-target="#pills-password" type="button" role="tab" aria-controls="pills-password" aria-selected="false">Password</button>
+                    </li>
+                   
+                  
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="tab-content" id="pills-tabContent">
+        <!-- My Details Tab Start -->
+        <div class="tab-pane fade show active" id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab" tabindex="0">
+            <div class="card mt-24">
+                <div class="card-header border-bottom">
+                    <h4 class="mb-4">My Details</h4>
+                    <p class="text-gray-600 text-15">Please update your details below</p>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row gy-4">
+                            <div class="col-sm-6 col-xs-6">
+                                <label for="username" class="form-label mb-8 h6">User Name</label>
+                                <input type="text" name="username" class="form-control py-11" id="username" value="{{ username }}" required>
+                            </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <label for="email" class="form-label mb-8 h6">Email</label>
+                                <input type="email" class="form-control py-11" id="email" name="email" value="{{ email }}" required>
+                            </div>
+    
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-main rounded-pill py-9">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- My Details Tab End -->
+    
+        <!-- Password Tab Start -->
+        <div class="tab-pane fade" id="pills-password" role="tabpanel" aria-labelledby="pills-password-tab" tabindex="0">
+            <div class="card mt-24">
+                <div class="card-header border-bottom">
+                    <h4 class="mb-4">Password Settings</h4>
+                    <p class="text-gray-600 text-15">Update your password</p>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row gy-4">
+                            <div class="col-12">
+                                <label for="current-password" class="form-label mb-8 h6">Current Password</label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control py-11" id="current-password" name="old_password" placeholder="Enter Current Password">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="new-password" class="form-label mb-8 h6">New Password</label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control py-11" id="new-password" name="new_password" placeholder="Enter New Password">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="confirm-password" class="form-label mb-8 h6">Confirm Password</label>
+                                <div class="position-relative">
+                                    <input type="password" class="form-control py-11" id="confirm-password" name="confirm_password" placeholder="Confirm New Password">
+                                </div>
+                            </div>
+    
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-main rounded-pill py-9">Save Changes</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Password Tab End -->
+    </div>
+    
+
+
+</div>
+
+
+{% endblock %}
