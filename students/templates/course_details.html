@@ -1,0 +1,70 @@
+{% extends 'student_base.html' %}
+
+
+{% block title %}
+
+    Student Dashboard | 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Course Content</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+    </div>
+   
+
+    <div class="card overflow-hidden">
+        <div class="card-body p-0">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th class="fixed-width">
+                            <div class="form-check">
+                                <input class="form-check-input border-gray-200 rounded-4" type="checkbox" id="selectAll">
+                            </div>
+                        </th>
+                        <th>Week</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for lesson in weekly_lessons %}
+                    <tr>
+                        <td class="fixed-width">
+                            <div class="form-check">
+                                <input class="form-check-input border-gray-200 rounded-4" type="checkbox">
+                            </div>
+                        </td>
+                        <td>{{ lesson.week_name }}</td>
+                        <td>
+                            <a href="{% url 'course_detail' course.id lesson.id %}" class="btn btn-main">Open Content</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+      
+    </div>
+
+    
+</div>
+
+
+{% endblock %}

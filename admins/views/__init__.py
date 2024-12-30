@@ -8,6 +8,6 @@ from .admin_approved_teachers import admin_approved_teachers
 from .admin_manage_students import admin_manage_students
 from .admin_pending_students import admin_pending_students
 from .admin_approved_students import admin_approved_students
-from .admin_manage_classes import admin_manage_classes
+from .admin_manage_classes import admin_manage_classes, admin_class_details
 from .admin_teacher_details import admin_teacher_details
 from .all_users import all_users

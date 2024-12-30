@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin_teacher_details/<int:teacher_id>/', views.admin_teacher_details, name='admin_teacher_details'),
 
     path('all_users/', views.all_users, name='all_users'),
+    path('admin/class/<int:class_id>/details/', views.admin_class_details, name='admin_class_details'),
+
 
 
     

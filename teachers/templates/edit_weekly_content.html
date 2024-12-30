@@ -93,57 +93,76 @@
 
             </div>
         
-            <!-- Quiz Form -->
+          
             <div class="card-body">
-                <form id="quizForm" method="POST">
-                    {% csrf_token %}
-                    <div class="mb-20">
-                        <label for="question_text" class="h6 mb-8 fw-semibold">Question</label>
-                        <textarea class="form-control fw-medium text-15" id="question_text" placeholder="Add question" name="question_text" required></textarea>
-                    </div>
-                    <div class="mb-20">
-                        <label class="h6 mb-8 fw-semibold">Multiple Choices</label>
-                        <div class="choices-container">
-                            <div class="mb-3">
-                                <label>Option A</label>
-                                <input type="text" name="option_a" class="form-control" placeholder="Enter option A" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Option B</label>
-                                <input type="text" name="option_b" class="form-control" placeholder="Enter option B" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Option C</label>
-                                <input type="text" name="option_c" class="form-control" placeholder="Enter option C" required>
-                            </div>
-                            <div class="mb-3">
-                                <label>Option D</label>
-                                <input type="text" name="option_d" class="form-control" placeholder="Enter option D" required>
+                {% if quiz %}
+                    <form id="quizForm" method="POST" action="{% url 'edit_weekly_content' quiz.id %}">
+                        {% csrf_token %}
+                        <div class="mb-20">
+                            <label for="question_text" class="h6 mb-8 fw-semibold">Question</label>
+                            <textarea class="form-control fw-medium text-15" id="question_text" placeholder="Add question" name="question_text" required></textarea>
+                        </div>
+                        <div class="mb-20">
+                            <label class="h6 mb-8 fw-semibold">Multiple Choices</label>
+                            <div class="choices-container">
+                                <div class="mb-3">
+                                    <label>Option A</label>
+                                    <input type="text" name="option_a" class="form-control" placeholder="Enter option A" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Option B</label>
+                                    <input type="text" name="option_b" class="form-control" placeholder="Enter option B" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Option C</label>
+                                    <input type="text" name="option_c" class="form-control" placeholder="Enter option C" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Option D</label>
+                                    <input type="text" name="option_d" class="form-control" placeholder="Enter option D" required>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-20">
-                        <label for="correct_answer" class="h6 mb-8 fw-semibold">Correct Answer</label>
-                        <select class="form-control form-select rounded-8 bg-gray-50 border border-main-200 py-19" id="correct_answer" name="correct_answer" required>
-                            <option value="" disabled selected>Select correct answer</option>
-                            <option value="A">Option A</option>
-                            <option value="B">Option B</option>
-                            <option value="C">Option C</option>
-                            <option value="D">Option D</option>
-                        </select>
-                    </div>
-                    <div class="mb-20">
-                        <label for="score" class="h6 mb-8 fw-semibold">Score</label>
-                        <input type="number" name="score" id="score" class="form-control" placeholder="Enter score" required>
-                    </div>
-
-                    <button type="submit" name="save_question" class="btn btn-secondary rounded-pill py-9">Save Question</button>
-
-                    <div class="flex-align justify-content-end gap-8">
-                        <button type="submit" name="publish_quiz" class="btn btn-primary rounded-pill py-9">Publish Quiz</button>
-                    </div>
+                        <div class="mb-20">
+                            <label for="correct_answer" class="h6 mb-8 fw-semibold">Correct Answer</label>
+                            <select class="form-control form-select rounded-8 bg-gray-50 border border-main-200 py-19" id="correct_answer" name="correct_answer" required>
+                                <option value="" disabled selected>Select correct answer</option>
+                                <option value="A">Option A</option>
+                                <option value="B">Option B</option>
+                                <option value="C">Option C</option>
+                                <option value="D">Option D</option>
+                            </select>
+                        </div>
+                        <div class="mb-20">
+                            <label for="score" class="h6 mb-8 fw-semibold">Score</label>
+                            <input type="number" name="score" id="score" class="form-control" placeholder="Enter score" required>
+                        </div>
+            
+                        <button type="submit" name="save_question" class="btn btn-secondary rounded-pill py-9">Save Question</button>
+                    </form>
+                {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="create_quiz" class="btn btn-success">Create Quiz</button>
                 </form>
+            
+                {% endif %}
             </div>
+            
+            
+            
+            <!-- Publish Quiz Section -->
+            <div class="card-body">
+                {% if quiz %}
+                    <form id="publishQuizForm" method="POST" action="{% url 'edit_weekly_content' quiz.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary rounded-pill py-9" id="publishQuizButton">Publish Quiz</button>
+                    </form>
+                {% else %}
+                    <p class="text-muted">Quiz cannot be published because it hasn't been created yet.</p>
+                {% endif %}
+            </div>
+            
             
             <div class="card-body p-0 overflow-x-auto">
                 <h3>Saved Questions</h3>
@@ -156,7 +175,7 @@
                             <th class="h6 text-gray-300">Delete</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="savedQuestionsTable">
                         {% for question in questions %}
                         <tr>
                             <td>
@@ -177,9 +196,22 @@
                         {% endfor %}
                     </tbody>
                 </table>
-
-               
             </div>
+            
+            <script>
+                document.getElementById("publishQuizButton").addEventListener("click", function (e) {
+                    const savedQuestionsTable = document.getElementById("savedQuestionsTable");
+                    const rows = savedQuestionsTable.getElementsByTagName("tr");
+                    
+                    if (rows.length === 0) {
+                        e.preventDefault(); // Prevent the form submission
+                        alert("Cannot publish quiz. Add at least one question first.");
+                    }
+                });
+            </script>
+            
+            
+   
 
          
           

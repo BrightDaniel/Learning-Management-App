@@ -1,0 +1,111 @@
+{% extends 'student_base.html' %}
+
+
+{% block title %}
+
+    Student Dashboard | 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+   
+<div class="dashboard-body">
+
+    <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="{% url 'course_details' course.id %}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Go Back </a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">{{ weekly_lesson.week_name }}</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+    <div class="row gy-4">
+        <div class="col-md-8">
+            <!-- Course Card Start -->
+            <div class="card">
+                <div class="card-body p-lg-20 p-sm-3">
+                    <div class="flex-between flex-wrap gap-12 mb-20">
+                        <div>
+                            <h3 class="mb-4">{{ weekly_lesson.week_name }}</h3>
+                            <span class="py-6 px-16 bg-main-50 text-main-600 rounded-pill text-15">Teacher: {{ teacher_name }}  </span>
+
+                        </div>
+
+                        <div class="flex-align flex-wrap gap-24">
+                            <span class="py-6 px-16 bg-main-50 text-main-600 rounded-pill text-15">{{ course.name }}</span>
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                    <div class="mb-24 pb-24 border-bottom border-gray-100">
+                        <h5 class="mb-12 fw-bold"> Weekly Content</h5>
+                        <p class="text-gray-300 text-15 mb-8">Below is the week's content for Week Name. Please Download the content below and read it, thoroughly study it and master the contents inside of the file. After you must have completed the course content, please return to your LMS and take the weekly practise Quiz. </p>
+                    </div>
+
+                    </div>
+
+                    <div class="rounded-16 overflow-hidden">
+                        <div class="d-grid gap-2">
+                            <a href="{{ weekly_lesson.content_file.url }}" class="btn btn-primary" >Download  Content</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-24">
+                        <div class="mb-24 mt-24  pb-24 border-bottom border-gray-100">
+                        </div>
+                        <div class="mb-24 pb-24 border-bottom border-gray-100">
+                            <h5 class="mb-12 fw-bold"> Course Description</h5>
+                            <p class="text-gray-300 text-15 mb-8">
+                                 {{ course.description|default:"No description provided for this course." }} </p>
+                        </div>
+
+                     
+                    </div>
+                </div>
+            </div>
+            <!-- Course Card End -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mt-24">
+                <div class="card-body">
+                    <h4 class="mb-20">Weekly Quiz</h4>
+                
+                    <h5 class="mb-16 mt-20">{{ course.name }} Quiz</h5>
+                    <p class="text-gray-300">A practice Quiz has been attached to this lesson. Please take the Quiz.</p>
+                    <br>
+                    <p class="text-gray-300">
+                        Note you have only one attempt. The score will be shown immediately after you submit the Quiz.
+                    </p>
+                    {% if quiz %}
+                    {% if user_has_taken_quiz %}
+                        <button class="btn btn-secondary rounded-pill py-11 w-100 mt-16" disabled>
+                            Already submitted this quiz
+                        </button>
+                    {% else %}
+                        <a href="{% url 'start_quiz' weekly_lesson.id %}" 
+                        onclick="return confirm('The quiz is graded. Do Not Use Google or any external resources. Do not leave the Quiz tab. Are you ready?')" 
+                        class="btn btn-main rounded-pill py-11 w-100 mt-16">
+                            Take the Quiz
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <button class="btn btn-secondary rounded-pill py-11 w-100 mt-16" disabled>No Quiz Yet</button>
+                {% endif %}
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

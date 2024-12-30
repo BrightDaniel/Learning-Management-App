@@ -34,9 +34,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'landing',
     'teachers',
     'students',
     'admins',
+    'cloudinary_storage',
+    'cloudinary'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'students.context_processors.student_context',  # global students function
+
             ],
         },
     },
@@ -70,9 +75,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'LMSProject.wsgi.application'
 
 
-LOGIN_URL = '/admin_login/'  # Redirect to your custom admin login page
-LOGIN_REDIRECT_URL = '/admin-dashboard/'  # Redirect after successful login
-LOGOUT_REDIRECT_URL = '/admin_login/'  # Redirect after logout
+LOGIN_URL = '/'   # Redirect to your custom admin login page
+# LOGIN_REDIRECT_URL = '/admin-dashboard/'  # Redirect after successful login
+# LOGOUT_REDIRECT_URL = '/admin_login/'  # Redirect after logout
 
 
 
@@ -137,3 +142,13 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}

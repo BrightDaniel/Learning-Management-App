@@ -1,14 +1,17 @@
 from django.db import models
 from .courses import Course
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
 
 class WeeklyLesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='weekly_lessons')
     week_name = models.CharField(max_length=100)
-    content_file = models.FileField(upload_to='weekly_lessons/', null=True, blank=True)
+    content_file = models.FileField(
+        upload_to='weekly_lessons/',
+        storage=RawMediaCloudinaryStorage(),
+        null=True, 
+        blank=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.week_name} - {self.course.name}"
 
 
 class WeeklyQuiz(models.Model):

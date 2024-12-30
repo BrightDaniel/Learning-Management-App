@@ -1,0 +1,220 @@
+{% extends 'student_base.html' %}
+
+
+{% block title %}
+
+    Quiz |
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+
+<style>
+    .delete-item {
+        transition: all 0.3s ease;
+    }
+    
+    .delete-item:hover {
+        background-color: #f8f9fa;
+        cursor: pointer;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .delete-item.selected {
+        background-color: #3e80f9 !important;  /* Light blue background */
+        border-color: #2196f3 !important;      /* Blue border */
+    }
+    
+    .delete-item.selected span {
+        color: #3e80f9;  /* Blue text */
+    }
+    </style>
+
+
+
+       
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15"> Quiz</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+        <!-- Buttons Start -->
+<div class="flex-align justify-content-end gap-8">
+
+<button type="button" class="btn btn-main rounded-pill py-9" > Do Not Leave This Quiz Page</button>
+</div>
+<!-- Buttons End -->
+
+    </div>
+
+    <!-- Course Tab Start -->
+    <div class="card">
+        <div class="card-header border-bottom border-gray-100 flex-between flex-wrap gap-8">
+            <div class="flex-align gap-8 flex-wrap">
+                <h5 class="mb-0">Quiz Questions</h5>        
+                <button type="button" class="text-main-600 text-md d-flex" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Quiz Questions">
+                    <i class="ph-fill ph-question"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <form id="quiz-form" method="post" action="{% url 'submit_quiz' %}">
+                {% csrf_token %}
+                <input type="hidden" name="week_id" value="{{ quiz.weekly_lesson.id }}">
+                {% if user_has_taken_quiz %}
+                <button class="btn btn-secondary rounded-pill py-11 w-100 mt-16" disabled>
+                    Already submitted this quiz
+                </button>
+            {% else %}
+
+                {% for question in questions %}
+                <div class="quiz-question" data-question-id="{{ question.id }}" style="{% if forloop.first %}display: block{% else %}display: none{% endif %}">
+                    <h5 class="mb-16">{{ question.question_text }}</h5>
+                    <div class="row g-20">
+                        <div class="col-sm-6">
+                            <label class="delete-item py-15 px-16 rounded-8 bg-gray-50 border border-main-200 flex-align gap-8">
+                                <input type="radio" name="answer-{{ question.id }}" value="A" class="d-none">
+                                <span class="w-24 h-24 bg-white rounded-circle flex-center text-capitalize text-14">A</span>
+                                <span class="text-gray-500">{{ question.option_a }}</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="delete-item py-15 px-16 rounded-8 bg-gray-50 border border-main-200 flex-align gap-8">
+                                <input type="radio" name="answer-{{ question.id }}" value="B" class="d-none">
+                                <span class="w-24 h-24 bg-white rounded-circle flex-center text-capitalize text-14">B</span>
+                                <span class="text-gray-500">{{ question.option_b }}</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="delete-item py-15 px-16 rounded-8 bg-gray-50 border border-main-200 flex-align gap-8">
+                                <input type="radio" name="answer-{{ question.id }}" value="C" class="d-none">
+                                <span class="w-24 h-24 bg-white rounded-circle flex-center text-capitalize text-14">C</span>
+                                <span class="text-gray-500">{{ question.option_c }}</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="delete-item py-15 px-16 rounded-8 bg-gray-50 border border-main-200 flex-align gap-8">
+                                <input type="radio" name="answer-{{ question.id }}" value="D" class="d-none">
+                                <span class="w-24 h-24 bg-white rounded-circle flex-center text-capitalize text-14">D</span>
+                                <span class="text-gray-500">{{ question.option_d }}</span>
+                            </label>
+                        </div>
+                    </div>
+        
+                    <div class="flex-align justify-content-end gap-8 mt-20">
+                        <button class="btn btn-outline-main rounded-pill py-9 back-btn" {% if forloop.first %}disabled{% endif %}>Back</button>
+                        <button class="btn btn-main rounded-pill py-9 continue-btn" disabled>Continue</button>
+                    </div>
+                </div>
+                {% endfor %}
+                <button id="submit-quiz-btn" class="btn btn-main rounded-pill py-11 w-100 mt-16" style="display: none;">
+                    Submit Quiz
+                </button>
+                {% endif %}
+
+            </form>
+        </div>
+        
+
+
+        
+    </div>
+    <!-- Course Tab End -->
+</div>
+
+
+
+ <script>
+    document.querySelectorAll('.quiz-question').forEach(questionDiv => {
+        const continueBtn = questionDiv.querySelector('.continue-btn');
+        const radios = questionDiv.querySelectorAll('input[type="radio"]');
+    
+        radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                continueBtn.disabled = false;
+            });
+        });
+    
+        const backBtn = questionDiv.querySelector('.back-btn');
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            questionDiv.style.display = 'none';
+            questionDiv.previousElementSibling.style.display = 'block';
+        });
+    
+        continueBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            questionDiv.style.display = 'none';
+            if (questionDiv.nextElementSibling.classList.contains('quiz-question')) {
+                questionDiv.nextElementSibling.style.display = 'block';
+            } else {
+                document.getElementById('submit-quiz-btn').style.display = 'block';
+            }
+        });
+    });
+    
+    window.onblur = () => {
+        document.getElementById('quiz-form').submit();
+    };
+    
+    document.getElementById('submit-quiz-btn').addEventListener('click', () => {
+        const answers = {};
+        document.querySelectorAll('.quiz-question').forEach(questionDiv => {
+            const questionId = questionDiv.dataset.questionId;
+            const selected = questionDiv.querySelector('input[type="radio"]:checked');
+            if (selected) {
+                answers[questionId] = selected.value;
+            }
+        });
+    
+        const weekId = document.getElementById('week-id').value;
+    
+        fetch('{% url "submit_quiz" %}', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({week_id: weekId, answers})
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(`You scored ${data.score} out of ${data.max_score}`);
+            window.location.href = "{% url 'course_detail' quiz.weekly_lesson.course.id quiz.weekly_lesson.id %}";
+        });
+    });
+
+    document.querySelectorAll('.quiz-question').forEach(questionDiv => {
+    const continueBtn = questionDiv.querySelector('.continue-btn');
+    const radios = questionDiv.querySelectorAll('input[type="radio"]');
+    const labels = questionDiv.querySelectorAll('.delete-item');
+
+    radios.forEach((radio, index) => {
+        radio.addEventListener('change', () => {
+            continueBtn.disabled = false;
+            
+            // Remove selected class from all labels
+            labels.forEach(label => {
+                label.classList.remove('selected');
+            });
+            
+            // Add selected class to the chosen option's label
+            radio.closest('.delete-item').classList.add('selected');
+        });
+    });
+
+});
+    </script> 
+
+{% endblock %}

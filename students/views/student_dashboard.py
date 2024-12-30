@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from teachers.models import Course, WeeklyLesson
+from teachers.models import Course
 
 @login_required
 def student_dashboard(request):
@@ -21,6 +21,7 @@ def student_dashboard(request):
     # Prepare course data with lesson and quiz counts
     course_data = [
         {
+            "id": course.id,  
             "name": course.name,
             "description": course.description,
             "teacher": course.teacher.get_full_name(),

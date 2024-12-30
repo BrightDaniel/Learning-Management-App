@@ -54,8 +54,8 @@
                         <select name="class_id" id="classAssociation" class="form-select py-9" required>
                             <option value="" disabled>Select a class</option>
                             {% for class in classes %}
-                                <option value="{{ class.id }}" {% if course.associated_class.id == class.id %}selected{% endif %}>{{ class.name }}</option>
-                            {% endfor %}
+                            <option value="{{ class.id }}" {% if course.associated_class.id == class.id %}selected{% endif %}>{{ class.name }}</option>
+                        {% endfor %}
                         </select>
                     </div>
 

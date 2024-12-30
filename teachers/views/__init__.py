@@ -9,4 +9,6 @@ from .teacher_manage_class import teacher_manage_class
 from .teacher_settings import teacher_settings
 from .teacher_logout import teacher_logout
 from .teacher_create_course import teacher_create_course
-from .teacher_manage_courses import teacher_manage_courses, edit_course_details, delete_weekly_content, edit_weekly_content, add_quiz_question, delete_question
+from .teacher_manage_courses import teacher_manage_courses, edit_course_details, delete_weekly_content, edit_weekly_content, delete_question
+from .teacher_view_course_grades import teacher_view_course_grades, teacher_view_grade
+from .teacher_edit_class import teacher_edit_class

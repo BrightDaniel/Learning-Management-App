@@ -58,7 +58,7 @@
     <!-- sidebar close btn -->
     
     <a href="{% url 'admin_dashboard' %}" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-100 z-1 pb-10">
-        <img src="{% static 'auth/assets/images/logo/logo.png' %}" alt="Logo">
+        <img src="{% static 'auth/assets/images/logo/logo.jpg' %}" alt="Logo">
     </a>
 
     <div class="sidebar-menu-wrapper overflow-y-auto scroll-sm">
@@ -73,83 +73,34 @@
                    
                     <!-- Submenu End -->
                 </li>
-                <li class="sidebar-menu__item has-dropdown">
-                    <a href="javascript:void(0)" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-graduation-cap"></i></span>
-                        <span class="text">Courses</span>
-                    </a>
-                    <!-- Submenu start -->
-                    <ul class="sidebar-submenu">
-                        <li class="sidebar-submenu__item">
-                            <a href="student-courses.html" class="sidebar-submenu__link"> Student Courses </a>
-                        </li>
-                        <li class="sidebar-submenu__item">
-                            <a href="mentor-courses.html" class="sidebar-submenu__link"> Mentor Courses </a>
-                        </li>
-                        <li class="sidebar-submenu__item">
-                            <a href="create-course.html" class="sidebar-submenu__link"> Create Course </a>
-                        </li>
-                    </ul>
-                    <!-- Submenu End -->
-                </li>
+              
                 <li class="sidebar-menu__item">
-                    <a href="students.html" class="sidebar-menu__link">
+                    <a href="{% url 'all_users' %}" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users-three"></i></span>
-                        <span class="text">Students</span>
+                        <span class="text">All Users</span>
                     </a>
                 </li>
                 <li class="sidebar-menu__item">
-                    <a href="assignment.html" class="sidebar-menu__link">
+                    <a href="{% url 'admin_manage_students' %}" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-clipboard-text"></i></span>
-                        <span class="text">Assignments</span>
+                        <span class="text">Manage Students</span>
                     </a>
                 </li>
                 <li class="sidebar-menu__item">
-                    <a href="mentors.html" class="sidebar-menu__link">
+                    <a href="{% url 'admin_manage_teachers' %}" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-users"></i></span>
-                        <span class="text">Mentors</span>
+                        <span class="text">Manage Teachers</span>
                     </a>
                 </li>
                 <li class="sidebar-menu__item">
-                    <a href="resources.html" class="sidebar-menu__link">
+                    <a href="{% url 'admin_manage_classes' %}" class="sidebar-menu__link">
                         <span class="icon"><i class="ph ph-bookmarks"></i></span>
-                        <span class="text">Resources</span>
+                        <span class="text">Manage Classes</span>
                     </a>
                 </li>
-                <li class="sidebar-menu__item">
-                    <a href="message.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-chats-teardrop"></i></span>
-                        <span class="text">Messages</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="analytics.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-chart-bar"></i></span>
-                        <span class="text">Analytics</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="event.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-calendar-dots"></i></span>
-                        <span class="text">Events</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="library.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-books"></i></span>
-                        <span class="text">Library</span>
-                    </a>
-                </li>
-                <li class="sidebar-menu__item">
-                    <a href="pricing-plan.html" class="sidebar-menu__link">
-                        <span class="icon"><i class="ph ph-coins"></i></span>
-                        <span class="text">Pricing</span>
-                    </a>
-                </li>
+            
                 
-                <li class="sidebar-menu__item">
-                    <span class="text-gray-300 text-sm px-20 pt-20 fw-semibold border-top border-gray-100 d-block text-uppercase">Settings</span>
-                </li>
+    
                 <li class="sidebar-menu__item">
                     <a href="{% url 'admin_settings' %}
                     " class="sidebar-menu__link">
@@ -185,94 +136,7 @@
 
     <div class="flex-align gap-16">
         <div class="flex-align gap-8">
-            <!-- Notification Start -->
-            <div class="dropdown">
-                <button class="dropdown-btn shaking-animation text-gray-500 w-40 h-40 bg-main-50 hover-bg-main-100 transition-2 rounded-circle text-xl flex-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="position-relative">
-                        <i class="ph ph-bell"></i>
-                        <span class="alarm-notify position-absolute end-0"></span>
-                    </span>
-                </button>
-                <div class="dropdown-menu dropdown-menu--lg border-0 bg-transparent p-0">
-                    <div class="card border border-gray-100 rounded-12 box-shadow-custom p-0 overflow-hidden">
-                        <div class="card-body p-0">
-                            <div class="py-8 px-24 bg-main-600">
-                                <div class="flex-between">
-                                    <h5 class="text-xl fw-semibold text-white mb-0">Notifications</h5>
-                                    <div class="flex-align gap-12">
-                                        <button type="button" class="bg-white rounded-6 text-sm px-8 py-2 hover-text-primary-600"> New </button>
-                                        <button type="button" class="close-dropdown hover-scale-1 text-xl text-white"><i class="ph ph-x"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-24 max-h-270 overflow-y-auto scroll-sm">
-                                <div class="d-flex align-items-start gap-12">
-                                    <img src="{% static 'auth/assets/images/thumbs/notification-img1.png' %}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
-                                    <div class="border-bottom border-gray-100 mb-24 pb-24">
-                                        <div class="flex-align gap-4">
-                                            <a href="index.html#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">Ashwin Bose is requesting access to Design File - Final Project. </a>
-                                            <!-- Three Dot Dropdown Start -->
-                                            <div class="dropdown flex-shrink-0">
-                                                <button class="text-gray-200 rounded-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ph-fill ph-dots-three-outline"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu--md border-0 bg-transparent p-0">
-                                                    <div class="card border border-gray-100 rounded-12 box-shadow-custom">
-                                                        <div class="card-body p-12">
-                                                            <div class="max-h-200 overflow-y-auto scroll-sm pe-8">
-                                                                <ul>
-                                                                    <li class="mb-0">
-                                                                        <a href="index.html#" class="py-6 text-15 px-8 hover-bg-gray-50 text-gray-300 rounded-8 fw-normal text-xs d-block">
-                                                                            <span class="text">Mark as read</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="mb-0">
-                                                                        <a href="index.html#" class="py-6 text-15 px-8 hover-bg-gray-50 text-gray-300 rounded-8 fw-normal text-xs d-block">
-                                                                            <span class="text">Delete Notification</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="mb-0">
-                                                                        <a href="index.html#" class="py-6 text-15 px-8 hover-bg-gray-50 text-gray-300 rounded-8 fw-normal text-xs d-block">
-                                                                            <span class="text">Report</span>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Three Dot Dropdown End -->
-                                        </div>
-                                        <div class="flex-align gap-6 mt-8">
-                                            <img src="{% static 'auth/assets/images/icons/google-drive.png' %}" alt="">
-                                            <div class="flex-align gap-4">
-                                                <p class="text-gray-900 text-sm text-line-1">Design brief and ideas.txt</p>
-                                                <span class="text-xs text-gray-200 flex-shrink-0">2.2 MB</span>
-                                            </div>
-                                        </div>
-                                        <div class="mt-16 flex-align gap-8">
-                                            <button type="button" class="btn btn-main py-8 text-15 fw-normal px-16">Accept</button>
-                                            <button type="button" class="btn btn-outline-gray py-8 text-15 fw-normal px-16">Decline</button>
-                                        </div>
-                                        <span class="text-gray-200 text-13 mt-8">2 mins ago</span>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-start gap-12">
-                                    <img src="{% static 'auth/assets/images/thumbs/notification-img2.png' %}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
-                                    <div class="">
-                                        <a href="index.html#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">Patrick added a comment on Design Assets - Smart Tags file:</a>
-                                        <span class="text-gray-200 text-13">2 mins ago</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="index.html#" class="py-13 px-24 fw-bold text-center d-block text-primary-600 border-top border-gray-100 hover-text-decoration-underline"> View All </a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Notification Start -->
+         
             
             <!-- Language Start -->
             
@@ -337,12 +201,11 @@
 
         <div class="dashboard-footer">
     <div class="flex-between flex-wrap gap-16">
-        <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Edmate 2024, All Right Reserverd</p>
-        <div class="flex-align flex-wrap gap-16">
-            <a href="index.html#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">License</a>
-            <a href="index.html#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">More Themes</a>
-            <a href="index.html#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Documentation</a>
-            <a href="index.html#" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Support</a>
+        <p class="text-gray-300 text-13 fw-normal"> &copy; Copyright Macdonald Trevan International schools 2024, All Right Reserverd</p>        <div class="flex-align flex-wrap gap-16">
+            <a href="" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">License</a>
+            <a href="" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">More Themes</a>
+            <a href="" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Documentation</a>
+            <a href="" class="text-gray-300 text-13 fw-normal hover-text-main-600 hover-text-decoration-underline">Support</a>
         </div>
     </div>
 </div>

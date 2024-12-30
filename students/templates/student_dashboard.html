@@ -78,7 +78,7 @@
                                             </div>
                     
                                             <div class="flex-between gap-4 flex-wrap mt-24">
-                                                <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">Start Course</a>
+                                                <a href="{% url 'course_details' course.id %}" class="btn btn-outline-main rounded-pill py-9">Open Course</a>
                                             </div>
                                         </div>
                                     </div>
@@ -95,20 +95,9 @@
             </div>
             <!-- Top Course End -->
 
-            
-            <!-- Table Start -->
-            <div class="card mt-24 overflow-hidden">
-                <div class="card-header">
-                    <div class="mb-0 flex-between flex-wrap gap-8">
-                        <h4 class="mb-0">Your Grades</h4>
-                        <a href="student-courses.html" class="text-13 fw-medium text-main-600 hover-text-decoration-underline">See All</a>
-                    </div>
-                </div>
-               
-             </div>
-            <!-- Table End -->
-
         </div>
+
+
         <div class="col-lg-3">
             
             <!-- Calendar Start -->

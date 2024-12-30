@@ -1,0 +1,107 @@
+{% extends 'student_base.html' %}
+
+
+{% block title %}
+
+    Student Grades | 
+
+{% endblock %}
+
+{% block content %}
+
+{% load static  %}
+
+     
+<div class="dashboard-body">
+
+    <div class="breadcrumb-with-buttons mb-24 flex-between flex-wrap gap-8">
+        <!-- Breadcrumb Start -->
+<div class="breadcrumb mb-24">
+<ul class="flex-align gap-4">
+<li><a href="{% url 'student_dashboard' %}" class="text-gray-200 fw-normal text-15 hover-text-main-600">Home</a></li>
+<li> <span class="text-gray-500 fw-normal d-flex"><i class="ph ph-caret-right"></i></span> </li>
+<li><span class="text-main-600 fw-normal text-15">Your Grade</span></li>
+</ul>
+</div>
+<!-- Breadcrumb End -->
+
+    </div>
+   
+
+    <div class="card overflow-hidden">
+        <div class="card-body p-0 overflow-x-auto">
+
+                     <!-- Table Start -->
+                     <div class="card mt-24 overflow-hidden">
+                        <div class="card-header">
+                            <div class="mb-0 flex-between flex-wrap gap-8">
+                                <h4 class="mb-0">Your Grades</h4>
+                            
+                            </div>
+                        </div>
+                    
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-0 overflow-x-auto">
+                                <table id="studentTable" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th class="h6 text-gray-300">Course</th>
+                                            <th class="h6 text-gray-300">Week</th>
+                                            <th class="h6 text-gray-300">Grade</th>
+                                            <th class="h6 text-gray-300">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for grade in grades %}
+                                            <tr>
+                                                <td>
+                                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ grade.course_name }}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ grade.week_name }}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="h6 mb-0 fw-medium text-gray-300">{{ grade.score }} / {{ grade.max_score }}</span>
+                                                </td>
+                                                <td>
+                                                    {% if grade.status == "Passed" %}
+                                                        <span class="text-13 py-2 px-8 bg-success-50 text-success-600 d-inline-flex align-items-center gap-8 rounded-pill">
+                                                            <span class="w-6 h-6 bg-success-600 rounded-circle flex-shrink-0"></span>
+                                                            {{ grade.status }}
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="text-13 py-2 px-8 bg-warning-50 text-warning-600 d-inline-flex align-items-center gap-8 rounded-pill">
+                                                            <span class="w-6 h-6 bg-warning-600 rounded-circle flex-shrink-0"></span>
+                                                            {{ grade.status }}
+                                                        </span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr>
+                                                <td colspan="4" class="text-center">
+                                                    <span class="h6 mb-0 fw-medium text-gray-300">No grades available yet.</span>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                       
+                    <!-- Table End -->
+
+
+        </div>
+        
+    </div>
+    
+</div>
+
+
+
+{% endblock %}

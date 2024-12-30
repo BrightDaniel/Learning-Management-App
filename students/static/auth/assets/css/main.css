@@ -9830,3 +9830,28 @@ button:focus {
 
 /* Email Css End */
 /*# sourceMappingURL=main.css.map */
+
+
+
+
+/*  */
+
+.delete-item {
+    transition: all 0.3s ease;
+}
+
+.delete-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.delete-item.selected {
+    background-color: #217cbc !important;  /* Light blue background */
+    border-color: #2196f3 !important;      /* Blue border */
+}
+
+.delete-item.selected span {
+    color: #2196f3;  /* Blue text */
+}

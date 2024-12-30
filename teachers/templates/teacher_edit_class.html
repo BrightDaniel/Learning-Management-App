@@ -46,30 +46,31 @@
                 <div class="row gy-20">
                     <div class="col-sm-12">
                         <label for="className" class="h5 mb-8 fw-semibold font-heading">Class Name <span class="text-13 text-gray-400 fw-medium">(Required)</span></label>
-                        <input type="text" name="class_name" class="form-control py-11 pe-76" id="className" placeholder="Enter Class Name" required>
+                        <input type="text" name="class_name" class="form-control py-11 pe-76" id="className" value="{{ class_instance.name }}" required>
                     </div>
-
+            
                     <div class="col-sm-6">
                         <label for="startDate" class="h5 mb-8 fw-semibold font-heading">Start Date</label>
-                        <input type="date" name="start_date" class="form-control py-11 pe-76" id="startDate">
+                        <input type="date" name="start_date" class="form-control py-11 pe-76" id="startDate" value="{{ class_instance.start_date }}">
                     </div>
-
+            
                     <div class="col-sm-6">
                         <label for="endDate" class="h5 mb-8 fw-semibold font-heading">End Date</label>
-                        <input type="date" name="end_date" class="form-control py-11 pe-76" id="endDate">
+                        <input type="date" name="end_date" class="form-control py-11 pe-76" id="endDate" value="{{ class_instance.end_date }}">
                     </div>
-
-                    <div class="col-sm-6">
+            
+                    <div class="col-sm-12">
                         <label for="description" class="h5 mb-8 fw-semibold font-heading">Description</label>
-                        <textarea name="description" class="form-control py-11 pe-76" id="description" placeholder="Describe the class"></textarea>
+                        <textarea name="description" class="form-control py-11 pe-76" id="description">{{ class_instance.description }}</textarea>
                     </div>
-                    
+            
                     <div class="col-sm-12 text-end">
-                        <button type="submit" class="btn btn-main rounded-pill py-9">Edit Class</button>
+                        <button type="submit" class="btn btn-main rounded-pill py-9">Save Changes</button>
+                        <button type="submit" name="delete_class" class="btn btn-danger rounded-pill py-9" onclick="return confirm('Are you sure you want to delete this class?');">Delete Class</button>
                     </div>
-
                 </div>
             </form>
+            
             
         </div>
     </div>

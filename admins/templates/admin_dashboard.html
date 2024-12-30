@@ -22,6 +22,28 @@
             
             <div class="row gy-4">
 
+                <div class="grettings-box position-relative rounded-16 bg-main-600 overflow-hidden gap-16 flex-wrap z-1">
+                    <img src="{% static 'auth/assets/images/bg/grettings-pattern.png' %}" alt="" class="position-absolute inset-block-start-0 inset-inline-start-0 z-n1 w-100 h-100 opacity-6">
+                    <div class="row gy-4">
+                        <div class="col-sm-7">
+                            <div class="grettings-box__content py-xl-4">
+                                {% if request.user.is_authenticated and request.user.is_superuser %}
+                                <h2 class="text-white mb-0">Hello, Admin {{ request.user.get_full_name|default:request.user.username }}! </h2>
+                            {% else %}
+                            <h2 class="text-white mb-0">Hello, Admin </h2>
+                            {% endif %}
+                                <p class="text-15 fw-light mt-4 text-white">Welcome To Your LMS ! </p>
+                                <p class="text-lg fw-light mt-24 text-white">Make Macdonald Trevan International schools better today</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 d-sm-block d-none">
+                            <div class="text-center h-100 d-flex justify-content-center align-items-end ">
+                                <img src="{% static 'auth/assets/images/thumbs/gretting-img.png' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-xxl-3 col-sm-6">
                     <div class="card">
                         <div class="card-body">
@@ -86,139 +108,7 @@
             <!-- Widgets End -->
 
 
-            <!-- Top Course Start -->
-            <div class="card mt-24">
-                <div class="card-body">
-                    <div class="mb-20 flex-between flex-wrap gap-8">
-                        <h4 class="mb-0">Top Courses Pick for You</h4>
-                        <a href="student-courses.html" class="text-13 fw-medium text-main-600 hover-text-decoration-underline">See All</a>
-                    </div>
-                    
-                    <div class="row g-20">
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="card border border-gray-100">
-                                <div class="card-body p-8">
-                                    <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                        <img src="{% static 'auth/assets/images/thumbs/course-img1.png' %}" alt="Course Image">
-                                    </a>
-                                    <div class="p-8">
-                                        <span class="text-13 py-2 px-10 rounded-pill bg-success-50 text-success-600 mb-16">Development</span>
-                                        <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">Full Stack Web Development</a></h5>
-
-                                        <div class="flex-align gap-8 flex-wrap mt-16">
-                                            <img src="{% static 'auth/assets/images/thumbs/user-img1.png' %}" class="w-28 h-28 rounded-circle object-fit-cover" alt="User Image">
-                                            <div>
-                                                <span class="text-gray-600 text-13">Created by <a href="https://html.themeholy.com/edmate/profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">Albert James</a> </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
-                                                <span class="text-13 text-gray-600">24 Lesson</span>
-                                            </div>
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
-                                                <span class="text-13 text-gray-600">40 Hours</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex-between gap-4 flex-wrap mt-24">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
-                                                <span class="text-13 fw-bold text-gray-600">4.9</span>
-                                                <span class="text-13 fw-bold text-gray-600">(12k)</span>
-                                            </div>
-                                            <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="card border border-gray-100">
-                                <div class="card-body p-8">
-                                    <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                        <img src="{% static 'auth/assets/images/thumbs/course-img5.png' %}" alt="Course Image">
-                                    </a>
-                                    <div class="p-8">
-                                        <span class="text-13 py-2 px-10 rounded-pill bg-warning-50 text-warning-600 mb-16">Design</span>
-                                        <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">Design System</a></h5>
-
-                                        <div class="flex-align gap-8 flex-wrap mt-16">
-                                            <img src="{% static 'auth/assets/images/thumbs/user-img5.png' %}" class="w-28 h-28 rounded-circle object-fit-cover" alt="User Image">
-                                            <div>
-                                                <span class="text-gray-600 text-13">Created by <a href="https://html.themeholy.com/edmate/profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">Albert James</a> </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
-                                                <span class="text-13 text-gray-600">24 Lesson</span>
-                                            </div>
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
-                                                <span class="text-13 text-gray-600">40 Hours</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex-between gap-4 flex-wrap mt-24">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
-                                                <span class="text-13 fw-bold text-gray-600">4.9</span>
-                                                <span class="text-13 fw-bold text-gray-600">(12k)</span>
-                                            </div>
-                                            <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-6">
-                            <div class="card border border-gray-100">
-                                <div class="card-body p-8">
-                                    <a href="course-details.html" class="bg-main-100 rounded-8 overflow-hidden text-center mb-8 h-164 flex-center p-8">
-                                        <img src="{% static 'auth/assets/images/thumbs/course-img6.png' %}" alt="Course Image">
-                                    </a>
-                                    <div class="p-8">
-                                        <span class="text-13 py-2 px-10 rounded-pill bg-danger-50 text-danger-600 mb-16">Frontend</span>
-                                        <h5 class="mb-0"><a href="course-details.html" class="hover-text-main-600">React Native Courese</a></h5>
-
-                                        <div class="flex-align gap-8 flex-wrap mt-16">
-                                            <img src="{% static 'auth/assets/images/thumbs/user-img6.png' %}" class="w-28 h-28 rounded-circle object-fit-cover" alt="User Image">
-                                            <div>
-                                                <span class="text-gray-600 text-13">Created by <a href="https://html.themeholy.com/edmate/profile.html" class="fw-semibold text-gray-700 hover-text-main-600 hover-text-decoration-underline">Albert James</a> </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-align gap-8 mt-12 pt-12 border-top border-gray-100">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-video-camera"></i></span>
-                                                <span class="text-13 text-gray-600">24 Lesson</span>
-                                            </div>
-                                            <div class="flex-align gap-4">
-                                                <span class="text-sm text-main-600 d-flex"><i class="ph ph-clock"></i></span>
-                                                <span class="text-13 text-gray-600">40 Hours</span>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="flex-between gap-4 flex-wrap mt-24">
-                                            <div class="flex-align gap-4">
-                                                <span class="text-15 fw-bold text-warning-600 d-flex"><i class="ph-fill ph-star"></i></span>
-                                                <span class="text-13 fw-bold text-gray-600">4.9</span>
-                                                <span class="text-13 fw-bold text-gray-600">(12k)</span>
-                                            </div>
-                                            <a href="course-details.html" class="btn btn-outline-main rounded-pill py-9">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Top Course End -->
+          
         </div>
 
         <div class="col-lg-3">
@@ -247,47 +137,7 @@
             </div>
             <!-- Calendar End -->
             
-            <!-- Assignment Start -->
-            <div class="card mt-24">
-                <div class="card-body">
-                    <div class="mb-20 flex-between flex-wrap gap-8">
-                        <h4 class="mb-0">Quiz Scores</h4>
-                        <a href="assignment.html" class="text-13 fw-medium text-main-600 hover-text-decoration-underline">See All</a>
-                    </div>
-                    <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1 mb-16">
-                        <div class="flex-align flex-wrap gap-8">
-                            <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph-fill ph-graduation-cap"></i></span>
-                            <div>
-                                <h6 class="mb-0">Do The Research</h6>
-                                <span class="text-13 text-gray-400">Due in 9 days</span>
-                            </div>
-                        </div>
-                        <a href="assignment.html" class="text-gray-900 hover-text-main-600"><i class="ph ph-caret-right"></i></a>
-                    </div>
-                    <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1 mb-16">
-                        <div class="flex-align flex-wrap gap-8">
-                            <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph ph-code"></i></span>
-                            <div>
-                                <h6 class="mb-0">PHP Dvelopment</h6>
-                                <span class="text-13 text-gray-400">Due in 2 days</span>
-                            </div>
-                        </div>
-                        <a href="assignment.html" class="text-gray-900 hover-text-main-600"><i class="ph ph-caret-right"></i></a>
-                    </div>
-                    <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1">
-                        <div class="flex-align flex-wrap gap-8">
-                            <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph ph-bezier-curve"></i></span>
-                            <div>
-                                <h6 class="mb-0">Graphic Design</h6>
-                                <span class="text-13 text-gray-400">Due in 5 days</span>
-                            </div>
-                        </div>
-                        <a href="assignment.html" class="text-gray-900 hover-text-main-600"><i class="ph ph-caret-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!-- Assignment End -->
-            
+         
           
         </div>
 
