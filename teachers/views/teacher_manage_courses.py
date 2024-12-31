@@ -131,15 +131,7 @@ def edit_weekly_content(request, content_id):
             messages.success(request, "Question added successfully!")
             return redirect('edit_weekly_content', content_id=content.id)
 
-        if 'publish_quiz' in request.POST:
-            if quiz and quiz.questions.exists():
-                quiz.is_published = True
-                quiz.save()
-                messages.success(request, "Quiz published successfully!")
-            else:
-                messages.error(request, "Cannot publish quiz. Add at least one question first.")
-            return redirect('edit_weekly_content', course_id=content.course.id)
-
+   
     questions = quiz.questions.all() if quiz else []
 
     return render(request, 'edit_weekly_content.html', {

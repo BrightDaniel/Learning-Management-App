@@ -96,8 +96,8 @@
           
             <div class="card-body">
                 {% if quiz %}
-                    <form id="quizForm" method="POST" action="{% url 'edit_weekly_content' quiz.id %}">
-                        {% csrf_token %}
+                <form id="quizForm" method="POST" action="{% url 'edit_weekly_content' lesson.id %}">
+                    {% csrf_token %}
                         <div class="mb-20">
                             <label for="question_text" class="h6 mb-8 fw-semibold">Question</label>
                             <textarea class="form-control fw-medium text-15" id="question_text" placeholder="Add question" name="question_text" required></textarea>
@@ -152,7 +152,7 @@
             
             
             <!-- Publish Quiz Section -->
-            <div class="card-body">
+            <!-- <div class="card-body">
                 {% if quiz %}
                     <form id="publishQuizForm" method="POST" action="{% url 'edit_weekly_content' quiz.id %}">
                         {% csrf_token %}
@@ -161,7 +161,7 @@
                 {% else %}
                     <p class="text-muted">Quiz cannot be published because it hasn't been created yet.</p>
                 {% endif %}
-            </div>
+            </div> -->
             
             
             <div class="card-body p-0 overflow-x-auto">

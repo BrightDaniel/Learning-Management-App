@@ -38,6 +38,7 @@ def submit_quiz(request):
             messages.error(request, "Quiz not available.")
             return redirect('course_detail', course_id=weekly_lesson.course.id, week_id=week_id)
 
+
         # Check if user has already submitted
         if QuizSubmission.objects.filter(user=request.user, quiz=quiz).exists():
             messages.error(request, "You have already submitted this quiz.")
@@ -57,4 +58,8 @@ def submit_quiz(request):
 
         # Flash message and redirect
         messages.success(request, f"Quiz successfully completed! Your score: {total_score}/{max_score}.")
-        return redirect('course_detail', course_id=weekly_lesson.course.id)
+        # return redirect('course_detail', course_id=weekly_lesson.course.id)
+        return redirect('course_detail', course_id=weekly_lesson.course.id, week_id=week_id)
+
+
+
